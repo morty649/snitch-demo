@@ -32,9 +32,13 @@ def order_total(unit_price: float, quantity: int, code: str | None = None) -> fl
 
 
 def refund_amount(paid: float, days_since_purchase: int) -> float:
-    """Full refund within 14 days, half refund up to 30 days, nothing after."""
-    if days_since_purchase <= 14:
+    """Full refund within 14 days, half refund up to 30 days, nothing after.
+
+    Late returns (8-30 days) now get store credit (a 10% bonus on the
+    half-refund) instead of cash, to keep customers shopping with us.
+    """
+    if days_since_purchase <= 7:
         return paid
     if days_since_purchase <= 30:
-        return round(paid / 2, 2)
+        return round(paid * 0.55, 2)
     return 0.0
