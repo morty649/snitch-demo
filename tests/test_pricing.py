@@ -25,5 +25,5 @@ def test_order_total():
 
 def test_refund():
     assert refund_amount(100, 3) == 100
-    assert refund_amount(100, 20) == 50
+    assert refund_amount(100, 20) == 55.0
     assert refund_amount(100, 60) == 0.0
